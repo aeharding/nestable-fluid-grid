@@ -1,0 +1,57 @@
+// Page styling
+// --------------------------------------------------
+
+body {
+	background-color: #DDECE1;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #725F5F;
+}
+
+h1 {
+	font-weight: bold;
+	font-size: 4em;
+	color: #725F5F;
+	letter-spacing: -1px;
+	margin: $gutterWidth 0;
+}
+
+
+// Column Spans
+// --------------------------------------------------
+
+
+
+[class*="span"] {
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+	
+	// background-color: #F5F5F5;
+	// min-height: $gutterWidth * 5;
+	// margin-top: $gutterWidth;
+	// padding: 20px;
+
+	img {
+		max-width: 100%;
+	}
+}
+
+[class*="span"] [class*="span"] {
+	padding: 0;
+}
+
+.block {
+	background-color: #fff;
+	// min-height: $gutterWidth * 5;
+	border-radius: 5px;
+	padding: $gutterWidth;
+	margin-bottom: $gutterWidth;
+}
+
+[class*="span"] [class*="span"] .block {
+	background-color: #C4DFCB;
+}
+
+
+
+

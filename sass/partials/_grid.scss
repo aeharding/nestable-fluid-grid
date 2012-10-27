@@ -1,0 +1,86 @@
+// Variables
+// --------------------------------------------------
+
+$totalColumns:			12;
+$gutterWidth:			1em;
+$columnWidth:			3em;
+$containerPadding:		1em;
+
+// Math
+// --------------------------------------------------
+
+// The end result width of full row of columns.
+$rowWidth: ($totalColumns * $columnWidth) + ($gutterWidth * ($totalColumns - 1)); 
+
+// The extra gutter needs to be there to calculate fluid column widths.
+$rowWidthFluid: ($totalColumns * $columnWidth) + ($gutterWidth * ($totalColumns));
+
+// For clearing floats like a boss h5bp.com/q
+@mixin clear {
+	&:before,
+	&:after {
+		display: table;
+		content: "";
+		line-height: 0;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+// The Container that centers the grid and adds padding on either side.
+.container {
+	max-width: $rowWidth + (2 * $containerPadding);
+	padding: {
+		left: $containerPadding;
+		right: $containerPadding;
+	}
+	margin: 0 auto;
+}
+
+
+.row {
+	@include clear;
+	// use a negative margin on the parent row so we don't have to bother with omegas or nth-childs
+	margin-left: percentage($gutterWidth / $rowWidthFluid) * -1;	
+	
+	@for $i from 1 through $totalColumns {
+		
+		// span width as a px or em value
+		$iSpan: (($columnWidth * $i) + ($gutterWidth * ($i - 1)));
+		// span width as a percentage
+		$iSpanFluid: percentage((($columnWidth * $i) + ($gutterWidth * ($i - 1))) / $rowWidthFluid);
+		// gutter as a percentage of the fluid row
+		$iSpanGutter: percentage($gutterWidth / $rowWidthFluid);
+
+		// spans
+		.span#{$i} {
+			
+			width: $iSpanFluid;
+			margin-left: $iSpanGutter; 
+			float: left;
+
+			// Nested Grid
+			@for $n from 1 through $i {
+				// inner row width
+				$r: ($columnWidth * $i) + ($gutterWidth * $i);
+				// inner span width as a px or em value
+				$nSpan: ($columnWidth * $n) + ($gutterWidth * ($n - 1));
+				// inner span width as a percentage
+				$nSpanFluid: percentage($nSpan / $r);
+				// gutter as a percentage of the inner row
+				$nSpanGutterFluid: percentage($gutterWidth / $r);
+
+				.row {
+					// using a negative margin on the row container to avoid omegas
+					margin-left: $nSpanGutterFluid * -1;
+				}
+
+				.row .span#{$n} {
+					margin-left: $nSpanGutterFluid;
+					width: $nSpanFluid;
+				}
+			}
+		}
+	}
+}
