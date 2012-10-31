@@ -6,72 +6,41 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html> <!--<![endif]-->
 <head>
 	<title>Grid</title>
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width" />
 	<link href="stylesheets/grid.css" media="screen, projection" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
 	<div class="container">
-		<div class="row">
-			<div class="span12">
-				<h1>A Nestable Fluid Grid</h1>
+		<pre>@include container(fluid)</pre>
+		<div class="row-12">
+			<div class="spans-12-12">
+				<pre>@include spans(12,12)</pre>
 			</div>
-			<div class="span6">
-				<div class="block">Not Nested</div>
+			<div class="spans-3-12">
+				<pre>@include spans(4,12)</pre>
 			</div>
-			<div class="span6">
-				<div class="row">
-					<div class="span6">
-						<div class="block">
-							Nested
+			<div class="spans-9-12">
+				<pre>@include spans(8,12)</pre>
+				<div class="row-9">
+					<div class="spans-5-9">
+						<pre>@include spans(5,9)</pre>
+						<div class="row-5">
+							<div class="spans-3-5">
+								<pre>@include spans(3,5)</pre>
+							</div>
+							<div class="spans-2-5">
+								<pre>@include spans(2,5)</pre>
+							</div>
 						</div>
+					</div>
+					<div class="spans-4-9">
+						<pre>@include spans(4,9)</pre>
 					</div>
 				</div>
 			</div>
-			<div class="span8">
-				<div class="row">
-					<div class="span4"><div class="block"></div></div>
-					<div class="span4"><div class="block"></div></div>
-				</div>
-			</div>
-			<div class="span4"><div class="block"></div></div>
-			
-			<div class="span2"><div class="block"></div></div>
-			<div class="span2"><div class="block"></div></div>
-			<div class="span2"><div class="block"></div></div>
-			<div class="span2"><div class="block"></div></div>
-			<div class="span2"><div class="block"></div></div>
-			<div class="span2"><div class="block"></div></div>
-
-			<div class="span4"><div class="block"></div></div>
-			<div class="span4">
-				<div class="row">
-					<div class="span2"><div class="block"></div></div>
-					<div class="span2"><div class="block"></div></div>
-				</div>
-			</div>
-			<div class="span4"><div class="block"></div></div>
-
-			<div class="span3"><div class="block"></div></div>
-			<div class="span3"><div class="block"></div></div>
-			<div class="span3"><div class="block"></div></div>
-			<div class="span3"><div class="block"></div></div>
-			
-			<div class="span1"><div class="block"></div></div>
-			<div class="span1"><div class="block"></div></div>
-			<div class="span1"><div class="block"></div></div>
-			<div class="span1"><div class="block"></div></div>
-			<div class="span1"><div class="block"></div></div>
-			<div class="span1"><div class="block"></div></div>
-			<div class="span1"><div class="block"></div></div>
-			<div class="span1"><div class="block"></div></div>
-			<div class="span1"><div class="block"></div></div>
-			<div class="span1"><div class="block"></div></div>
-			<div class="span1"><div class="block"></div></div>
-			<div class="span1"><div class="block"></div></div>
-
-
-
-		</div>		
+		</div>
 	</div>
 
 </body>

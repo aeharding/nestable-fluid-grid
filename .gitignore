@@ -1,6 +1,4 @@
 
 *.scssc
 
-stylesheets/.DS_Store
-
-sass/.DS_Store
+.DS_Store

@@ -1,21 +1,54 @@
-// Variables
+// Infinitely Nestable Fluid Grid
+// --------------------------------------------------
+
+// Instructions: Assign values to each of the four variables.
+
+// Options
 // --------------------------------------------------
 
 $totalColumns:			12;
 $gutterWidth:			1em;
-$columnWidth:			3em;
+$columnWidth:			6em;
 $containerPadding:		1em;
 
-// Math
+// Grids must be created and nested in the following manner:
+
+// Mixins
 // --------------------------------------------------
 
-// The end result width of full row of columns.
-$rowWidth: ($totalColumns * $columnWidth) + ($gutterWidth * ($totalColumns - 1)); 
+// 1.
+// Assign to the container div. Type can be static or fluid.
+// @include container($type)
+// --------------------------------------------------
 
-// The extra gutter needs to be there to calculate fluid column widths.
-$rowWidthFluid: ($totalColumns * $columnWidth) + ($gutterWidth * ($totalColumns));
+// 2.
+// Assign row mixin to start a grid. $totalColumns should be equal
+// to the number of spans the grid is nested in.
+// @include row($totalColumns)
+// --------------------------------------------------
 
-// For clearing floats like a boss h5bp.com/q
+// 3. 
+// Assign spans mixin to column spans. Must be have row parent and match $totalColumns 
+// @include spans($numSpans, $totalColumns)
+
+// Markup Structure with Example Mixin Parameters
+
+// container
+// 	row(12)
+// 		span(4,12)
+// 		span(4,12)
+// 			row(4)
+// 				span(2,4)
+// 				span(2,4)
+// 		span(4,12)
+// 		span(4,12)
+
+// END 
+// --------------------------------------------------
+
+
+
+
 @mixin clear {
 	&:before,
 	&:after {
@@ -28,9 +61,22 @@ $rowWidthFluid: ($totalColumns * $columnWidth) + ($gutterWidth * ($totalColumns)
 	}
 }
 
-// The Container that centers the grid and adds padding on either side.
-.container {
-	max-width: $rowWidth + (2 * $containerPadding);
+// Grid Math
+// --------------------------------------------------
+
+// The extra gutter needs to be there to calculate fluid column widths.
+$rowContext: ($totalColumns * $columnWidth) + ($gutterWidth * $totalColumns);
+
+// The end result width of full row of columns.
+$rowWidth: ($totalColumns * $columnWidth) + ($gutterWidth * ($totalColumns - 1)); 
+
+@mixin container($type:fluid) {
+	@if ($type == fluid) {
+		max-width: $rowWidth + (2 * $containerPadding);
+	}
+	@else if ($type == static) {
+		width: $rowWidth + (2 * $containerPadding);
+	}
 	padding: {
 		left: $containerPadding;
 		right: $containerPadding;
@@ -38,49 +84,25 @@ $rowWidthFluid: ($totalColumns * $columnWidth) + ($gutterWidth * ($totalColumns)
 	margin: 0 auto;
 }
 
-
-.row {
+@mixin row ($totalColumns) {
 	@include clear;
-	// use a negative margin on the parent row so we don't have to bother with omegas or nth-childs
-	margin-left: percentage($gutterWidth / $rowWidthFluid) * -1;	
+	$rowContext: ($totalColumns * $columnWidth) + ($gutterWidth * $totalColumns);
+	$gutterWidthPercent: percentage($gutterWidth / $rowContext);
+
+	margin-left: $gutterWidthPercent * -1;
+}
+
+@mixin spans($numberSpans, $totalColumns) {
+
+	$rowContext: ($totalColumns * $columnWidth) + ($gutterWidth * $totalColumns);
+
+	$spanWidthUnit: ($numberSpans * $columnWidth) + (($numberSpans - 1) * $gutterWidth);
+	$spanWidthPercent: percentage($spanWidthUnit / $rowContext );
 	
-	@for $i from 1 through $totalColumns {
-		
-		// span width as a px or em value
-		$iSpan: (($columnWidth * $i) + ($gutterWidth * ($i - 1)));
-		// span width as a percentage
-		$iSpanFluid: percentage((($columnWidth * $i) + ($gutterWidth * ($i - 1))) / $rowWidthFluid);
-		// gutter as a percentage of the fluid row
-		$iSpanGutter: percentage($gutterWidth / $rowWidthFluid);
+	$spanGutterWidth: $gutterWidth;
+	$spanGutterPercent: percentage( $spanGutterWidth / $rowContext );
 
-		// spans
-		.span#{$i} {
-			
-			width: $iSpanFluid;
-			margin-left: $iSpanGutter; 
-			float: left;
-
-			// Nested Grid
-			@for $n from 1 through $i {
-				// inner row width
-				$r: ($columnWidth * $i) + ($gutterWidth * $i);
-				// inner span width as a px or em value
-				$nSpan: ($columnWidth * $n) + ($gutterWidth * ($n - 1));
-				// inner span width as a percentage
-				$nSpanFluid: percentage($nSpan / $r);
-				// gutter as a percentage of the inner row
-				$nSpanGutterFluid: percentage($gutterWidth / $r);
-
-				.row {
-					// using a negative margin on the row container to avoid omegas
-					margin-left: $nSpanGutterFluid * -1;
-				}
-
-				.row .span#{$n} {
-					margin-left: $nSpanGutterFluid;
-					width: $nSpanFluid;
-				}
-			}
-		}
-	}
+	width: $spanWidthPercent;
+	margin-left: $spanGutterPercent;
+	float: left;
 }

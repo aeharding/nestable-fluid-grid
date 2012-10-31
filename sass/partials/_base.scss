@@ -1,5 +1,19 @@
-// Page styling
-// --------------------------------------------------
+// Compass Vertical Rhythym
+@import "compass/typography/vertical_rhythm";
+@include establish-baseline;
+
+$base-font-size: 12px;
+$base-line-height: 18px;
+$round-to-nearest-half-line: true;
+$default-rhythm-border-style: dashed;
+
+// Color 
+@mixin color($n:1) {
+	$baseColor: #DAE9AC;
+	$color: adjust-lightness($baseColor, $n);
+	background-color: $color;
+}
+
 
 body {
 	background-color: #DDECE1;
@@ -8,49 +22,168 @@ body {
 }
 
 h1 {
-	font-weight: bold;
-	font-size: 4em;
+	@include adjust-font-size-to(78px);
+	@include margin-trailer(.5);
+	@include margin-leader(.5);
 	color: #725F5F;
-	letter-spacing: -1px;
-	margin: $gutterWidth 0;
 }
 
+h2 {
+	@include adjust-font-size-to(32px);
+	@include margin-trailer(.5);
+	color: #725F5F;
+}
+
+p, ul {
+	@include adjust-font-size-to(14px);
+	@include margin-trailer(1);
+
+}
+
+
+.nav  {
+	@include adjust-font-size-to(16px);
+}
+
+.one {
+	@include leader();
+}
+
+.two {
+	// @include rhythm($leader: 2, $trailer: 2);
+	@include margin-leader(1);
+	@include margin-trailer(1);
+	@include rhythm-borders(2px, 2);
+	
+}
+.three {
+	@include adjust-font-size-to(32px);
+}
+.four {
+	@include trailer();
+	@include trailing-border();
+}
+
+@mixin border-box {
+-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */	
+}
+
+@mixin moon-block {
+	background-color: #000;
+	margin-bottom: $gutterWidth;
+	padding: 10px;
+}
+
+// Page styling
+// --------------------------------------------------
+
+
+h1 {
+	font-weight: bold;
+	letter-spacing: -1px;
+	
+}
+
+h2 {
+	font-weight: bold;
+	letter-spacing: -1px;
+
+}
+
+h3 {
+	font-weight: bold;
+	letter-spacing: -1px;
+
+}
+
+img {
+	max-width: 100%;
+}
 
 // Column Spans
 // --------------------------------------------------
 
-
-
-[class*="span"] {
-	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
-	box-sizing: border-box;         /* Opera/IE 8+ */
-	
-	// background-color: #F5F5F5;
-	// min-height: $gutterWidth * 5;
-	// margin-top: $gutterWidth;
-	// padding: 20px;
-
-	img {
-		max-width: 100%;
+@mixin mobile {
+	@media screen and (max-width : 520px) {
+		@content;
 	}
 }
 
-[class*="span"] [class*="span"] {
-	padding: 0;
+@mixin tablet {
+	@media screen and (max-width: 768px) {
+		@content;
+	}
 }
 
-.block {
-	background-color: #fff;
-	// min-height: $gutterWidth * 5;
-	border-radius: 5px;
-	padding: $gutterWidth;
-	margin-bottom: $gutterWidth;
+// [class*="spans"] {
+// 	background-color: #fff;
+// 	@include margin-trailer(.25);
+// 	@include margin-leader(.25);
+// 	@include border-box;
+// 	padding: 10px;
+// 	@include border-radius(2px);
+// }
+
+// >[class*="spans"]>[class*="spans"] {
+// 	padding: 0;
+// 	background-color: #ddd;
+// }
+
+pre {
+	// background-color: #fff;
+	@include margin-trailer(.25);
+	@include margin-leader(.25);
+	@include border-box;
+	padding: 10px;
+	display: block;
+	@include border-radius(2px);
 }
 
-[class*="span"] [class*="span"] .block {
-	background-color: #C4DFCB;
+.container {
+	@include container(fluid);
 }
+
+.row-12 {
+	@include row(12);
+	.spans-12-12 {
+		@include spans(12,12);
+		@include color(2);
+	}
+	.spans-3-12 {
+		@include spans(3,12);
+		@include color(5);
+	}
+
+	.spans-9-12 {
+		@include spans(9,12);
+		@include color(6);
+		.row-9 {
+			@include row(9);
+			.spans-5-9 {
+				@include spans(5,9);
+				@include color(8);
+				.row-5 {
+					@include row(5);
+					.spans-3-5 {
+						@include spans(3,5);
+						@include color(8);
+					}
+					.spans-2-5 {
+						@include spans(2,5);
+						@include color(8);
+					}
+				}
+			}
+			.spans-4-9 {
+				@include spans(4,9);
+			}
+		}
+	}
+}
+
+
 
 
 
