@@ -1,4 +1,5 @@
-// Compass Vertical Rhythym
+// This file is just for styling of the demo grid page. Nothing in here is required for the grid mixins to function.
+@import "compass/css3/border-radius";
 @import "compass/typography/vertical_rhythm";
 @include establish-baseline;
 
@@ -10,14 +11,16 @@ $default-rhythm-border-style: dashed;
 // Color 
 @mixin color($n:1) {
 	$baseColor: #DAE9AC;
-	$color: adjust-lightness($baseColor, $n);
+	$colorHue: adjust-hue($baseColor, $n);
+	$color: darken($colorHue, ($n/5));
 	background-color: $color;
 }
 
 
 body {
 	background-color: #DDECE1;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "Courier New", monospace;
+	@include adjust-font-size-to(10px);
 	color: #725F5F;
 }
 
@@ -32,6 +35,10 @@ h2 {
 	@include adjust-font-size-to(32px);
 	@include margin-trailer(.5);
 	color: #725F5F;
+	text-align: center;
+	span {
+		font-size: 12px;
+	}
 }
 
 p, ul {
@@ -40,6 +47,11 @@ p, ul {
 
 }
 
+p {
+	text-align: center;
+	font-weight: bold;
+	@include adjust-font-size-to(10px);
+}
 
 .nav  {
 	@include adjust-font-size-to(16px);
@@ -87,6 +99,8 @@ h1 {
 }
 
 h2 {
+	@include adjust-font-size-to(24px);
+	@include leader(1);
 	font-weight: bold;
 	letter-spacing: -1px;
 
@@ -116,75 +130,121 @@ img {
 		@content;
 	}
 }
-
-// [class*="spans"] {
-// 	background-color: #fff;
-// 	@include margin-trailer(.25);
-// 	@include margin-leader(.25);
-// 	@include border-box;
-// 	padding: 10px;
-// 	@include border-radius(2px);
-// }
-
-// >[class*="spans"]>[class*="spans"] {
-// 	padding: 0;
-// 	background-color: #ddd;
-// }
-
 pre {
-	// background-color: #fff;
+	font-size: .875em;
+	font-weight: bold;
 	@include margin-trailer(.25);
 	@include margin-leader(.25);
 	@include border-box;
 	padding: 10px;
-	display: block;
-	@include border-radius(2px);
+	margin: 20px 0;
+	text-align: center;
 }
 
 .container {
 	@include container(fluid);
+	@include trailer(1);
+}
+
+[class*="spans"] {
+	
+	border-top: 1px solid #E2F5E3;
+	@include border-box;
+}
+
+.row-12 > [class*="spans"] {
+	border-left: 1px solid #B5C583;
+	border-bottom: 1px solid #B5C583;
+}
+
+.row-12 > [class*="spans"]:last-child {
+	border-right: 1px solid #B5C583;
+}
+
+.row-12 > [class*="spans"] [class*="spans"] {
+	border-left: 1px solid #B5C583;
+}
+
+.row-12 > [class*="spans"] [class*="spans"]:first-child {
+	border-left: 0;
 }
 
 .row-12 {
 	@include row(12);
 	.spans-12-12 {
 		@include spans(12,12);
-		@include color(2);
+		@include color(20);
 	}
+
+	.spans-4-12 {
+		@include spans(4,12);
+		@include color(20);
+	}
+
 	.spans-3-12 {
 		@include spans(3,12);
-		@include color(5);
+		@include color(40);
 	}
 
 	.spans-9-12 {
 		@include spans(9,12);
-		@include color(6);
+		@include color(40);
 		.row-9 {
 			@include row(9);
 			.spans-5-9 {
 				@include spans(5,9);
-				@include color(8);
+				@include color(60);
 				.row-5 {
 					@include row(5);
 					.spans-3-5 {
 						@include spans(3,5);
-						@include color(8);
+						@include color(80);
 					}
 					.spans-2-5 {
 						@include spans(2,5);
-						@include color(8);
+						@include color(80);
 					}
 				}
 			}
 			.spans-4-9 {
 				@include spans(4,9);
+				@include color(60);
 			}
 		}
 	}
 }
 
 
-
+//lazy media query
+@include tablet {
+	.row-12 {
+		.spans-3-12 {
+			@include spans(12,12);
+		}
+		.spans-4-12 {
+			@include spans(6,12);
+		}
+		.spans-9-12 {
+			@include spans(12,12);
+		
+			.row-9 {
+				@include row(12);
+				.spans-5-9 {
+					@include spans(12, 12);
+					.row-5 {
+						@include row(12);
+						.spans-3-5, .spans-2-5 {
+							@include spans(6,12);
+						}
+					}
+				}
+				.spans-4-9 {
+					@include spans(12,12);
+				}
+			}
+		}
+	}		
+}
 
 
 

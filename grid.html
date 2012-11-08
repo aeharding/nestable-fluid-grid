@@ -14,10 +14,11 @@
 <body>
 	<div class="container">
 		<pre>@include container(fluid)</pre>
+		<p>$grid-columns: 12; $grid-gutter-width: 1em; $grid-column-width: 8em; $grid-container-padding: 1em;	</p>
+		
+		<h2>Fluid grids within fluid grids.</h2>
+		<p>Consistent gutter width, no omegas, alphas or nth-childs.</p>
 		<div class="row-12">
-			<div class="spans-12-12">
-				<pre>@include spans(12,12)</pre>
-			</div>
 			<div class="spans-3-12">
 				<pre>@include spans(4,12)</pre>
 			</div>
@@ -41,6 +42,47 @@
 				</div>
 			</div>
 		</div>
+		
+		<h2>Columns flow naturally when stacked.</h2>
+		<div class="row-12">
+			<div class="spans-4-12">
+				<pre>@include spans(4,12)</pre>
+			</div>
+			<div class="spans-4-12">
+				<pre>@include spans(4,12)</pre>
+			</div>
+			<div class="spans-4-12">
+				<pre>@include spans(4,12)</pre>
+			</div>
+			<div class="spans-4-12">
+				<pre>@include spans(4,12)</pre>
+			</div>
+			<div class="spans-4-12">
+				<pre>@include spans(4,12)</pre>
+			</div>
+			<div class="spans-4-12">
+				<pre>@include spans(4,12)</pre>
+			</div>
+			<div class="spans-4-12">
+				<pre>@include spans(4,12)</pre>
+			</div>
+			<div class="spans-4-12">
+				<pre>@include spans(4,12)</pre>
+			</div>
+			<div class="spans-4-12">
+				<pre>@include spans(4,12)</pre>
+			</div>
+			<div class="spans-4-12">
+				<pre>@include spans(4,12)</pre>
+			</div>
+			<div class="spans-4-12">
+				<pre>@include spans(4,12)</pre>
+			</div>
+			<div class="spans-4-12">
+				<pre>@include spans(4,12)</pre>
+			</div>
+		</div>
+		
 	</div>
 
 </body>
