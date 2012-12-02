@@ -214,6 +214,27 @@ pre {
 	}
 }
 
+.grid {
+	@include container(12);
+	pre {@include color(20);}
+}
+
+.row {
+	@include row(12);
+}
+
+
+@for $i from 1 through 12 {
+	.col#{$i} {
+		@include spans($i,12);
+	}
+	.push#{$i} {
+		@include push($i,12);
+	}
+	.pull#{$i} {
+		@include pull($i,12);
+	}
+}
 
 //lazy media query
 @include tablet {

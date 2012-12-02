@@ -12,6 +12,57 @@
 
 </head>
 <body>
+	<div class="grid">
+		<div class="row">
+			<div class="col1"><pre>col1</pre></div>
+			<div class="col1"><pre>col1</pre></div>
+			<div class="col1"><pre>col1</pre></div>
+			<div class="col1"><pre>col1</pre></div>
+			<div class="col1"><pre>col1</pre></div>
+			<div class="col1"><pre>col1</pre></div>
+			<div class="col1"><pre>col1</pre></div>
+			<div class="col1"><pre>col1</pre></div>
+			<div class="col1"><pre>col1</pre></div>
+			<div class="col1"><pre>col1</pre></div>
+			<div class="col1"><pre>col1</pre></div>
+			<div class="col1"><pre>col1</pre></div>
+			
+			<div class="col2"><pre>col2</pre></div>
+			<div class="col2"><pre>col2</pre></div>
+			<div class="col2"><pre>col2</pre></div>
+			<div class="col2"><pre>col2</pre></div>
+			<div class="col2"><pre>col2</pre></div>
+			<div class="col2"><pre>col2</pre></div>
+			
+			<div class="col3"><pre>col3</pre></div>
+			<div class="col3"><pre>col3</pre></div>
+			<div class="col3"><pre>col3</pre></div>
+			<div class="col3"><pre>col3</pre></div>
+			
+			<div class="col4"><pre>col4</pre></div>
+			<div class="col4"><pre>col4</pre></div>
+			<div class="col4"><pre>col4</pre></div>
+			
+			<div class="col6"><pre>col6</pre></div>
+			<div class="col6"><pre>col6</pre></div>
+			
+			<div class="col1 push1"><pre>col1 push1</pre></div>
+			<div class="col1 push1"><pre>col1 push1</pre></div>
+			<div class="col1 push1"><pre>col1 push1</pre></div>
+			<div class="col1 push1"><pre>col1 push1</pre></div>
+			<div class="col1 push1"><pre>col1 push1</pre></div>
+			<div class="col1 push1"><pre>col1 push1</pre></div>
+			
+			<div class="col2 push2"><pre>col2 push2</pre></div>
+			<div class="col2 push2"><pre>col2 push2</pre></div>
+			<div class="col2 push2"><pre>col2 push2</pre></div>
+			
+			<div class="col6 push6"><pre>col6 push6</pre></div>
+
+
+
+		</div>
+	</div>
 	<div class="container">
 		<pre>@include container(fluid)</pre>
 		<p>$grid-columns: 12; $grid-gutter-width: 1em; $grid-column-width: 8em; $grid-container-padding: 1em;	</p>
@@ -23,7 +74,7 @@
 				<pre>@include spans(4,12)</pre>
 			</div>
 			<div class="spans-9-12">
-				<pre>@include spans(8,12)</pre>
+				<pre>@include spans(9,12)</pre>
 				<div class="row-9">
 					<div class="spans-5-9">
 						<pre>@include spans(5,9)</pre>
@@ -42,7 +93,15 @@
 				</div>
 			</div>
 		</div>
-		
+		<h2>Push and Pull</h2>
+		<div class="row-12">
+			<div class="spans-4-12 push2">
+				<pre>@include spans(4,12) @include push(2,12)</pre>
+			</div>
+			<div class="spans-4-12 pull2">
+				<pre>@include spans(4,12) @include pull(2,12)</pre>
+			</div>
+		</div>
 		<h2>Columns flow naturally when stacked.</h2>
 		<div class="row-12">
 			<div class="spans-4-12">

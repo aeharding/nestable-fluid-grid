@@ -63,3 +63,34 @@ $row-width: ($grid-columns * $grid-column-width) + ($grid-gutter-width * ($grid-
 	margin-left: $span-gutter-percent;
 	float: left;
 }
+
+// Todo. DRY
+
+@mixin push($column-spans, $grid-columns) {
+
+	$row-context: ($grid-columns * $grid-column-width) + ($grid-gutter-width * $grid-columns);
+
+	$span-width-unit: ($column-spans * $grid-column-width) + (($column-spans - 1) * $grid-gutter-width);
+	$span-width-percent: percentage($span-width-unit / $row-context );
+	
+	$spangrid-gutter-width: $grid-gutter-width;
+	$span-gutter-percent: percentage( $spangrid-gutter-width / $row-context );
+
+	margin-left: (2*$span-gutter-percent) + $span-width-percent;
+}
+@mixin pull($column-spans, $grid-columns) {
+
+	$row-context: ($grid-columns * $grid-column-width) + ($grid-gutter-width * $grid-columns);
+
+	$span-width-unit: ($column-spans * $grid-column-width) + (($column-spans - 1) * $grid-gutter-width);
+	$span-width-percent: percentage($span-width-unit / $row-context );
+	
+	$spangrid-gutter-width: $grid-gutter-width;
+	$span-gutter-percent: percentage( $spangrid-gutter-width / $row-context );
+
+	margin-right: (2*$span-gutter-percent) + $span-width-percent;
+}
+
+
+
+
